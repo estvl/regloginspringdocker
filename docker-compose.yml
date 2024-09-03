@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: login_system
+      MYSQL_PASSWORD: root
+    ports:
+      - "3308:3306" # Mapping container's 3306 port to host's 3308 port
+    networks:
+      - springboot-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    image: registration-login-demo
+    container_name: springboot-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/login_system # Corrected port to 3306
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - springboot-network
+
+networks:
+  springboot-network:
+
+volumes:
+  mysql-data:

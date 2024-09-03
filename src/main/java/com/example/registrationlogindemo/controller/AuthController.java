@@ -3,7 +3,9 @@ package com.example.registrationlogindemo.controller;
 import com.example.registrationlogindemo.dto.UserDto;
 import com.example.registrationlogindemo.entity.User;
 import com.example.registrationlogindemo.service.UserService;
-import jakarta.validation.Valid;
+//import jakarta.validation.Valid;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
